@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Terra.WebUI.Data;
 using Terra.WebUI.Models;
 using Terra.WebUI.Services;
+using Terra.BLL.Interfaces;
+using Terra.BLL.Services;
 
 namespace Terra.WebUI
 {
@@ -21,9 +23,10 @@ namespace Terra.WebUI
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("hosting.json", optional: true)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
+ 
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
@@ -52,6 +55,8 @@ namespace Terra.WebUI
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            
+            services.AddSingleton<IGameServersHub, GameServersHub>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
