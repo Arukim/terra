@@ -1,0 +1,13 @@
+@model Terra.WebUI.Models.GamesViewModels.IndexViewModel
+
+@{
+    // ViewBag.Title = "Games Page";
+}
+
+<ul>
+
+@foreach(var server in Model.GameServers){
+    <li> @server.Title </li>
+}
+
+</ul>
