@@ -36,7 +36,7 @@ namespace Terra.BLL.Services
 
         public void Add(GameServerModel gs)
         {
-            if(gs == null || string.IsNullOrEmpty(gs.Title) || gs.Uri == null)
+            if(gs == null || string.IsNullOrEmpty(gs.Type) || gs.Uri == null)
                 throw new ArgumentException("Empty model");
                 
             var key = $"{gs.Type}_{gs.Uri.AbsoluteUri}";
